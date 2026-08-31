@@ -27,7 +27,17 @@ def tweet_tahmini():
     messagebox.showinfo("Tweet ve İsim Analizi", f"Girdiğiniz tweet {tweet_message}\nGirdiğiniz isim {isim_message}")
 
 # Veri setini yükle
-veri_seti = pd.read_csv("C:\\Users\\90552\\Desktop\\tweets.csv", encoding="ISO-8859-9")
+import os
+import sys
+
+if getattr(sys, 'frozen', False):
+    uygulama_klasoru = os.path.dirname(sys.executable)
+else:
+    uygulama_klasoru = os.path.dirname(os.path.abspath(__file__))
+
+csv_yolu = os.path.join(uygulama_klasoru, "tweets.csv")
+
+veri_seti = pd.read_csv(csv_yolu, encoding="ISO-8859-9")
 veri_seti.dropna(inplace=True)
 
 # Bağımsız değişken (X) ve bağımlı değişken (y) olarak ayır
@@ -47,9 +57,7 @@ app = tk.Tk()
 app.title("Tweet ve İsim Analiz Uygulaması")
 
 # Fotoğraf
-photo = PhotoImage(file="C:\\Users\\90552\\Desktop\\200w.gif")  # Resim dosyasının yolunu belirtin
-photo_label = tk.Label(app, image=photo, bg="#f0f0f0")
-photo_label.pack(pady=10)
+
 app.configure(bg="#f0f0f0")  # Arka plan rengini ayarla
 
 # Frame
